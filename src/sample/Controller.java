@@ -51,6 +51,25 @@ public class Controller {
     private void popuniMjesto(){
         mjestoRodjenjaComboBox.setItems(mj);
     }
+
+    private boolean validanIndeks(String unos) {
+        return (unos.length() == 5 && unos.matches("[0-9]+"));
+    }
+    private boolean validnoImePrezime(String unos) {
+
+        return (unos.length() >= 1 && unos.length() <= 20 && unos.matches("[a-zA-Z]+"));
+    }
+    private boolean validanEmail(String unos) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(unos);
+        return m.matches();
+    }
+    private boolean validanTelefon(String unos) {
+        if ((unos.length() != 9 && unos.length() != 10) || !unos.matches("[0-9]+")) return false;
+        else return true;
+    }
+
     @FXML
     private void initialize() {
         godinaStudija();
