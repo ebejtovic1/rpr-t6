@@ -18,3 +18,10 @@
 {
     -fx-background-color: pink;
 }
+.poljeIspravno {
+    -fx-background-color: greenyellow;
+}
+
+.poljeNijeIspravno {
+    -fx-background-color: lightpink;
+}

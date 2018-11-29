@@ -9,6 +9,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.util.function.Function;
+
 public class Controller {
     ObservableList<String> god= FXCollections.observableArrayList("Prva","Druga","Treća");
     ObservableList<String> ods= FXCollections.observableArrayList("RI","AE","TK","EE");
@@ -66,8 +68,21 @@ public class Controller {
         return m.matches();
     }
     private boolean validanTelefon(String unos) {
-        if ((unos.length() != 9 && unos.length() != 10) || !unos.matches("[0-9]+")) return false;
+        if ((unos.length() != 9 && unos.length() != 10 && unos.length()!=0) || !unos.matches("[0-9]+")) return false;
         else return true;
+    }
+
+    private void provjerUnosa(TextField tekstualnoPolje, Function<String, Boolean> validacija) {
+        tekstualnoPolje.textProperty().addListener((observableValue, o, n) -> {
+            if (validacija.apply(n)) {
+                tekstualnoPolje.getStyleClass().removeAll("poljeNijeIspravno");
+                tekstualnoPolje.getStyleClass().add("poljeIspravno");
+            } else {
+                tekstualnoPolje.getStyleClass().removeAll("poljeIspravno");
+                tekstualnoPolje.getStyleClass().add("poljeNijeIspravno");
+            }
+        });
+
     }
 
     @FXML
@@ -78,6 +93,11 @@ public class Controller {
         popuniBorilacke();
         popuniCiklus();
         popuniMjesto();
+        provjerUnosa(imeField, this::validnoImePrezime);
+        provjerUnosa(prezimeField, this::validnoImePrezime);
+        provjerUnosa(indeksField, this::validanIndeks);
+        provjerUnosa(telefonField, this::validanTelefon);
+        provjerUnosa(emailField, this::validanEmail);
 
     }
 
