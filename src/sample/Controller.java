@@ -8,6 +8,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 import java.time.LocalDate;
 import java.util.function.Function;
@@ -35,6 +37,15 @@ public class Controller {
     public TextField emailField;
     public TextField JMBGField;
     public DatePicker dateField;
+    private ValidationSupport[] support;
+
+    public Controller() {
+        support = new ValidationSupport[8];
+        for (int i = 0; i < 8; i++)
+            support[i] = new ValidationSupport();
+    }
+
+
 
     private void godinaStudija(){
         godinaStudijaChoiceBox.setItems(god);
@@ -75,6 +86,10 @@ public class Controller {
             duzinaMjeseci[1] = 29;
         return  ((dan > 0 && dan <= duzinaMjeseci[mjesec - 1]));
         
+    }
+
+    private boolean validanGrad(String unos) {
+        return (!mjestoRodjenjaComboBox.getEditor().getText().equals("") && unos.length() >= 1 && unos.length() <= 40 && Character.isUpperCase(unos.charAt(0)));
     }
 
     private int getJMBGDan() {
@@ -128,11 +143,47 @@ public class Controller {
                 tekstualnoPolje.getStyleClass().add("poljeNijeIspravno");
             }
         });
+    }
 
+    private void provjeraUnosaNakonFokusa(TextField tekstualnoPolje, ValidationSupport support) {
+        tekstualnoPolje.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue || tekstualnoPolje.getText().equals(""))
+                support.setErrorDecorationEnabled(false);
+            else
+                support.setErrorDecorationEnabled(true);
+        });
+    }
+
+    private void provjerUnosaDatuma(DatePicker datumPolje) {
+        datumPolje.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                support[4].setErrorDecorationEnabled(true);
+                if (datumPolje.getEditor().getText().equals("")) {
+                    datumPolje.getStyleClass().removeAll("poljeNijeIspravno", "poljeIspravno");
+                    datumPolje.getStyleClass().add("poljeNeutralno");
+                } else if (validanDatumRodjenja()) {
+                    datumPolje.getStyleClass().removeAll("poljeNijeIspravno", "poljeNeutralno");
+                    datumPolje.getStyleClass().add("poljeIspravno");
+                } else {
+                    datumPolje.getStyleClass().removeAll("poljeIspravno", "poljeNeutralno");
+                    datumPolje.getStyleClass().add("poljeNijeIspravno");
+                }
+            } else {
+                support[4].setErrorDecorationEnabled(false);
+            }
+        });
     }
 
     @FXML
     private void initialize() {
+        support[0].registerValidator(imeField, false, Validator.createPredicateValidator(o1 -> validnoImePrezime(imeField.getText()), "Ime mora počinjati sa velikim slovom, dozvoljena su isključivo slova engleskog alfabeta i ne smije biti duže od 20 karaktera"));
+        support[1].registerValidator(prezimeField, false, Validator.createPredicateValidator(o1 -> validnoImePrezime(prezimeField.getText()), "Prezime mora počinjati sa velikim slovom, dozvoljena su isključivo slova engleskog alfabeta i ne smije biti duže od 20 karaktera"));
+        support[2].registerValidator(indeksField, false, Validator.createPredicateValidator(o1 -> validanIndeks(indeksField.getText()), "Indeks mora biti petocifreni broj"));
+        support[3].registerValidator(JMBGField, false, Validator.createPredicateValidator(o1 -> validanJMBG(JMBGField.getText()), "Neispravan format JMBG"));
+        support[4].registerValidator(dateField, false, Validator.createPredicateValidator(o1 -> validanDatumRodjenja(), "Vaš datum rođenja se mora poklapati sa JMBG, ne smije biti u budućnosti"));
+        support[5].registerValidator(mjestoRodjenjaComboBox, false, Validator.createPredicateValidator(o1 -> validanGrad((String) mjestoRodjenjaComboBox.getValue()), "Grad mora počinjati sa velikim slovom, dozvoljena su isključivo slova engleskog alfabeta i ne smije biti duže od 40 karaktera"));
+        support[6].registerValidator(telefonField, false, Validator.createPredicateValidator(o1 -> validanTelefon(telefonField.getText()), "Telefon unosite u formatu: 0XXYYYZZZ"));
+        support[7].registerValidator(emailField, false, Validator.createPredicateValidator(o1 -> validanEmail(emailField.getText()), "Neispravan email"));
         godinaStudija();
         popuniOdsjek();
         popuniRedovan();
@@ -145,6 +196,15 @@ public class Controller {
         provjerUnosa(telefonField, this::validanTelefon);
         provjerUnosa(emailField, this::validanEmail);
         provjerUnosa(JMBGField, this::validanJMBG);
+        provjerUnosaDatuma(dateField);
+        provjerUnosa(mjestoRodjenjaComboBox.getEditor(), this::validanGrad);
+        provjeraUnosaNakonFokusa(imeField, support[0]);
+        provjeraUnosaNakonFokusa(prezimeField, support[1]);
+        provjeraUnosaNakonFokusa(indeksField, support[2]);
+        provjeraUnosaNakonFokusa(JMBGField, support[3]);
+        provjeraUnosaNakonFokusa(mjestoRodjenjaComboBox.getEditor(), support[5]);
+        provjeraUnosaNakonFokusa(telefonField, support[6]);
+        provjeraUnosaNakonFokusa(emailField, support[7]);
 
     }
 
