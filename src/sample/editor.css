@@ -3,20 +3,20 @@
 }
 
 #osPod {
-    -fx-background-color: pink;
+    -fx-background-color: lightskyblue;
 }
 #licPod {
-    -fx-background-color: pink;
+    -fx-background-color: lightskyblue;
 }
 #konPod {
-    -fx-background-color: pink;
+    -fx-background-color: lightskyblue;
 }
 #stuPod {
-    -fx-background-color: pink;
+    -fx-background-color: lightskyblue;
 }
 #potvrdiBtn
 {
-    -fx-background-color: pink;
+    -fx-background-color: PeachPuff;
 }
 .poljeIspravno {
     -fx-background-color: greenyellow;

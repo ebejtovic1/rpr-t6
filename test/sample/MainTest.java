@@ -41,4 +41,21 @@ class MainTest {
                 }
         );
     }
+
+    @Test
+    public void provjeraPrezime (FxRobot robot) {
+        TextField ime = robot.lookup("#prezimeField").queryAs(TextField.class);
+        robot.clickOn("#prezimeField");
+        assertAll(
+                () -> {
+                    robot.write("Bejtovic23");
+                    assertTrue(ime.getStyleClass().contains("poljeNijeIspravno"));
+                },
+                () -> {
+                    robot.type(KeyCode.BACK_SPACE);
+                    robot.type(KeyCode.BACK_SPACE);
+                    assertTrue(ime.getStyleClass().contains("poljeIspravno"));
+                }
+        );
+    }
 }

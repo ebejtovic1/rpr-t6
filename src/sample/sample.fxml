@@ -33,13 +33,19 @@
       <RowConstraints />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints />
       <RowConstraints />
       <RowConstraints maxHeight="31.0" minHeight="31.0" prefHeight="31.0" />
       <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
       <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
       <RowConstraints />
       <RowConstraints />
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
    <children>
       <Label fx:id="osPod" text="Osnovni podaci:" GridPane.columnSpan="3">
@@ -59,36 +65,36 @@
       <Label text="JMBG:" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <Label text="Datum rođenja:" GridPane.columnIndex="3" GridPane.rowIndex="3" />
       <Label text="Mjesto rođenja:" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-      <TextField fx:id="JMBGField" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-      <Label fx:id="konPod" text="Kontakt podaci:" GridPane.rowIndex="6">
+      <TextField fx:id="JMBGField" prefHeight="31.0" prefWidth="84.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+      <Label fx:id="konPod" text="Kontakt podaci:" GridPane.rowIndex="8">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="18.0" />
          </font></Label>
-      <Label text="Kontakt adresa:" GridPane.rowIndex="7" />
-      <Label text="Kontakt telefon:" GridPane.rowIndex="8" />
-      <Label text="Kontakt email:" GridPane.rowIndex="9" />
-      <TextField fx:id="adresaField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <TextField fx:id="telefonField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Label fx:id="stuPod" text="Podaci o studiju:" GridPane.columnIndex="3" GridPane.rowIndex="6">
+      <Label text="Kontakt adresa:" GridPane.rowIndex="9" />
+      <Label text="Kontakt telefon:" GridPane.rowIndex="10" />
+      <Label text="Kontakt email:" GridPane.rowIndex="12" />
+      <TextField fx:id="adresaField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <TextField fx:id="telefonField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <Label fx:id="stuPod" text="Podaci o studiju:" GridPane.columnIndex="3" GridPane.rowIndex="8">
          <font>
             <Font name="Berlin Sans FB Demi Bold" size="18.0" />
          </font></Label>
-      <Label text="Odsjek:" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-      <Label text="Godina studija:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
-      <Label text="Ciklus studija:" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-      <Label text="Redovan/Samofinansirajući:" GridPane.columnIndex="3" GridPane.rowIndex="11" />
-      <Label text="Pripada posebnim boračkim kategorijama?" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+      <Label text="Odsjek:" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+      <Label text="Godina studija:" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+      <Label text="Ciklus studija:" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+      <Label text="Redovan/Samofinansirajući:" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+      <Label text="Pripada posebnim boračkim kategorijama?" GridPane.columnIndex="3" GridPane.rowIndex="14" />
       <ComboBox fx:id="mjestoRodjenjaComboBox" editable="true" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-      <ChoiceBox fx:id="odsjekChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-      <ChoiceBox fx:id="godinaStudijaChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-      <ChoiceBox fx:id="ciklusStudijaChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-      <ChoiceBox fx:id="redovanSamofinansirajuciChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="11" />
-      <ChoiceBox fx:id="borilackeChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-      <Button fx:id="potvrdiBtn" mnemonicParsing="false" onAction="#kliknutoDugmeUnos" prefHeight="31.0" prefWidth="115.0" text="Potvrdi" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="13">
+      <ChoiceBox fx:id="odsjekChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+      <ChoiceBox fx:id="godinaStudijaChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+      <ChoiceBox fx:id="ciklusStudijaChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+      <ChoiceBox fx:id="redovanSamofinansirajuciChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+      <ChoiceBox fx:id="borilackeChoiceBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="14" />
+      <Button fx:id="potvrdiBtn" mnemonicParsing="false" onAction="#kliknutoDugmeUnos" prefHeight="31.0" prefWidth="115.0" text="Potvrdi" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="18">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <DatePicker fx:id="dateField" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+      <DatePicker fx:id="dateField" prefHeight="31.0" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
    </children>
 </GridPane>
